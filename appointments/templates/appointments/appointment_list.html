@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointments</title>
+</head>
+<body>
+    <h1>All Appointments</h1>
+    <ul>
+        {% for appointment in appointments %}
+            <li>{{ appointment.name }} - {{ appointment.date }} - {{ appointment.email }} - {{ appointment.description }}</li>
+        {% empty %}
+            <li>No appointments yet!</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'appointment_form' %}">Book New Appointment</a>
+</body>
+</html>
