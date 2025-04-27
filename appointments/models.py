@@ -1,12 +1,14 @@
+# appointments/models.py
+
+from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
-
 class Appointment(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
+    time = models.TimeField()
     description = models.TextField()
+    status = models.CharField(max_length=20, default='Booked')  # New field
 
     def __str__(self):
-        return f"Appointment with {self.name} on {self.date}"
+        return f"{self.user.username} - {self.date} at {self.time}"

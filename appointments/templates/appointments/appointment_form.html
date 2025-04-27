@@ -1,15 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Book an Appointment</title>
-</head>
-<body>
-    <h1>Book an Appointment</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Book Appointment</button>
-    </form>
-    <a href="{% url 'appointment_list' %}">View Appointments</a>
-</body>
-</html>
+<!-- appointments/templates/appointments/appointment_form.html -->
+{% extends 'appointments/base_generic.html' %}
+
+{% block content %}
+    <div class="appointment-form">
+        <h2>Book an Appointment</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Time</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <button type="submit">Book Appointment</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+<!-- appointments/templates/appointments/base_generic.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment System</title>
+    <link rel="stylesheet" href="{% static 'appointments/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar (Dashboard) -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Dashboard</h3>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="{% url 'appointment_list' %}">Appointments</a></li>
+                <!-- Add other dashboard links here -->
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="top-bar">
+                {% if user.is_authenticated %}
+                    <div class="user-profile">
+                        <div class="profile-pic">
+                            {{ user.username|slice:":1" }}
+                        </div>
+                        <span>Welcome, {{ user.username }}!</span>
+                        <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+                    </div>
+                {% else %}
+                    <div class="auth-links">
+                        <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a>
+                    </div>
+                {% endif %}
+            </div>
+            
+
+            <!-- Page Content -->
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

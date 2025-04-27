@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'appointments',
     'rest_framework',
     'corsheaders',
+    'djongo',
+    'booking',
 ]
 
 MIDDLEWARE = [
@@ -65,10 +67,13 @@ ROOT_URLCONF = 'appointment_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'appointments/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -76,6 +81,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'appointment_system.wsgi.application'
 
@@ -86,9 +93,12 @@ WSGI_APPLICATION = 'appointment_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'appointments_db',
+        'NAME': 'appointment_db',  # This is the database name you switched to earlier
     }
 }
+
+LOGIN_URL = 'login'  # Ensure this matches the name of the URL for login
+
 
 
 # Password validation
@@ -126,6 +136,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "appointments/static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
